@@ -1,17 +1,16 @@
 from pomegranate import *
 
-start = DiscreteDistribution({
+d1 = DiscreteDistribution({
     "sol": 0.75,
     "chuva": 0.25
 })
 
-transitions = ConditionalProbabilityTable([
+d2 = ConditionalProbabilityTable([
     ["sol", "sol", 0.9],
     ["sol", "chuva", 0.1],
     ["chuva", "sol", 0.6],
     ["chuva", "chuva", 0.4]
-], [start])
+], [d1])
 
-model = MarkovChain([start, transitions])
-
+model = MarkovChain([d1, d2])
 print(model.sample(100))
